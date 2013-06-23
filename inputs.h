@@ -1,5 +1,4 @@
-/*
- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  *	Filename:	inputs.h
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  *	Purpose:	Provide functions for main methods that involve inputting data and exiting.
@@ -16,8 +15,8 @@
 #include <time.h>
 #include <ctype.h>
 #include <inttypes.h>
-/*
- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  *	Function:	input_ull
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  *	Purpose:	Prompts and retreives a user entered number. Sends -1 to signify close.
@@ -29,27 +28,35 @@
  */
 extern unsigned long long input_ull();
 
-/*
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+ |	Function:	another_input
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
- *	Function:	another_input
+ |	Purpose:	Asks the user to enter if they would like to enter another input. 
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
- *	Purpose:	Asks the user to enter if they would like to enter another input. 
+ |	@return:	1,					Another input is desired.
+ |				0,					Another input is not desired.
+ |				-2,					A memory allocation was unsuccessful.
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
- *	@return:	1,					Another input is desired.
- *				0,					Another input is not desired.
- *				-2,					A memory allocation was unsuccessful.
+ |	Algorithm:	The user will be continously prompted to enter yes or no until they do enter
+ |				either yes, no, y, or n. Once they do, entering y or yes will result in 1
+ |				being returned. no or n will result in 0 being returned.
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-*/
+ |	Note: 		If a memory allocation fails, a value of -2 is returned.
+ | 	Errors:		If the inputted string is over 128 characters long, the program will crash.
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+ */
 extern int another_input();
 
-/*
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+ |	Subroutine:	countdown
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
- *	Subroutine:	countdown
+ |	Purpose:	This function waits a given time in seconds, while displaying the time left
+ |				in a countdown.
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
- *	Purpose:	This function waits five seconds, while displaying the time left before a 
- *				program will close.
+ |	@param:		timeout,			the number of seconds that will be counted down from.
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
- *	@param:		timeout,			the number of seconds that will be counted down from.
+ |	Notes:		An additional second waited because if the computers time is close to 
+ |				rolling over, a the full timout	time will not be waited.
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  */
 extern void countdown(int timeout);

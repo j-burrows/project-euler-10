@@ -1,5 +1,4 @@
-/*
- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Filename:	linkedlist_ull.h
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Purpose:	Provide the structure of a linked list of unsigned long longs, and
@@ -7,8 +6,6 @@
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Author:		Jonathan Burrows
  |	Date:		November 30th 2012
- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
- |	Dependancy:	string.h
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  */
 #ifndef LINKEDLIST_ULL_H
@@ -18,8 +15,7 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
-/*
- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Structure:	list_llu
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Purpose:	To have a structure that contains a node in a linked list. Has a unsigned
@@ -31,8 +27,7 @@ typedef struct node_llu{
 	struct node_llu* next;
 } node_llu;
 
-/*
- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Structure:	list_llu
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Purpose:	To have a structure that contains the head and tail of a linked list.
@@ -43,33 +38,36 @@ typedef struct list_llu{
 	node_llu* tail;
 } list_llu;
 
-/*
- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Function:	init_node_llu
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Purpose:	Creates a new node with a given value, and returns a pointer to it.
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	@param:		value,			Value that the node will have.
- |	@return:	made_node,		Node which was created with the given value.
+ |	@return:	node_making,		Node which was created with the given value.
+ |				NULL,			Could not allocate memory for new node.
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+ |	Error:		If memory could not be allocated for a new node, NULL is returned.
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  */
 extern node_llu* init_node_llu(unsigned long long value);
 
-/*
- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Function:	init_list_llu
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Purpose:	Creates a new list with head set to a given value, and returns a pointer
  |				to the newly created list.
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	@param:		value_head,		Value that the head node will be set to.
- |	@return:	made_list,		A pointer to the newly created list.
+ |	@return:	list_making,		A pointer to the newly created list.
+ |				NULL,			Memory allocation failed.
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+ |	Errors:		If memory couldn't be allocated to create a new node/list, NULL is returned.
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  */
 extern list_llu* init_list_llu(unsigned long long value_head);
 
-/*
- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Subroutine:	free_list_llu
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Purpose:	To free all nodes in a linked list of unsigned long longs.
@@ -79,8 +77,7 @@ extern list_llu* init_list_llu(unsigned long long value_head);
 */
 extern void free_list_llu(list_llu* list_deleting);
 
-/*
- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Function:	add_node_llu
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Purpose:	Adds a new node, with a given value, to the back of the list.
@@ -90,11 +87,13 @@ extern void free_list_llu(list_llu* list_deleting);
  |	@return:	1,				The node was successfully added.
  |				0,				The node was not successfully added.
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+ |	Errors:		If memory allocation fails for the node to be added, then list is unchanged
+ |				and a value of zero is returned.
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  */
 extern int add_node_llu(list_llu* current, unsigned long long value_adding);
 
-/*
- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Function:	in_list
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
  |	Purpose:	Checks if a node in the given list has a matching value with the given.
